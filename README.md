@@ -41,13 +41,13 @@ their well-being. This project aims to create a comprehensive system that integr
 health monitoring, fall detection, and medication reminders, along with a fall recovery
 timer to track recovery times after falls. This enhances safety, ensures timely assistance,
 and improves the quality of life for elderly individuals living independently.<br> <br>
-Here are the features of the Elderly Care Monitoring System
-Real-Time Health Monitoring: Continuously tracks vital parameters such as heart
-rate and body temperature, providing immediate alerts for abnormalities.
-Error-free Fall Detection Mechanism: Quickly identifies falls and notifies caregivers
+Here are the features of the Elderly Care Monitoring System:<br>
+~ Real-Time Health Monitoring: Continuously tracks vital parameters such as heart
+rate and body temperature, providing immediate alerts for abnormalities.<br>
+~ Error-free Fall Detection Mechanism: Quickly identifies falls and notifies caregivers
 at the same time avoiding any false alarms using a robust recovery timer system and
-debouncing system, ensuring prompt assistance in emergencies.
-Medicine Reminder System: Alerts seniors when to take their medications, prevent-
+debouncing system, ensuring prompt assistance in emergencies.<br>
+~ Medicine Reminder System: Alerts seniors when to take their medications, prevent-
 ing missed doses and promoting adherence to medication schedules.
 </details>
 
