@@ -33,14 +33,14 @@ like abnormal heart rates, high temperatures, and falls, reducing health risks. 
 more, managing multiple medications can be challenging for seniors, so incorporating a
 medicine reminder feature helps ensure timely intake and prevents missed doses. This
 system provides peace of mind for caregivers, enabling timely medical intervention and
-better health management.\\
+better health management.<br><br>
 The growing elderly population faces significant challenges in health management and
 safety. Many seniors struggle to monitor vital health parameters, leading to unnoticed
 risks. The complexity of medication regimens can result in missed doses, jeopardizing
 their well-being. This project aims to create a comprehensive system that integrates
 health monitoring, fall detection, and medication reminders, along with a fall recovery
 timer to track recovery times after falls. This enhances safety, ensures timely assistance,
-and improves the quality of life for elderly individuals living independently.
+and improves the quality of life for elderly individuals living independently.<br> <br>
 Here are the features of the Elderly Care Monitoring System
 Real-Time Health Monitoring: Continuously tracks vital parameters such as heart
 rate and body temperature, providing immediate alerts for abnormalities.
