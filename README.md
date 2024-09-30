@@ -1,4 +1,4 @@
-# Write your mini-project title
+# Elderly Care Monitoring System
 
 <!-- First Section -->
 
@@ -13,7 +13,7 @@
 
 > Member-1: Aayushman, 231CS105, aayushman.231cs105@nitk.edu.in
 
-> member-2: Atharva Parkhi, 231CS115, aparkhi.231cs115@nitk.edu.in
+> Member-2: Atharva Parkhi, 231CS115, aparkhi.231cs115@nitk.edu.in
 
 > Member-3: Sahil Mengji, 231CS151, sahilmengji.231cs151@nitk.edu.in
 
@@ -33,7 +33,7 @@ like abnormal heart rates, high temperatures, and falls, reducing health risks. 
 more, managing multiple medications can be challenging for seniors, so incorporating a
 medicine reminder feature helps ensure timely intake and prevents missed doses. This
 system provides peace of mind for caregivers, enabling timely medical intervention and
-better health management.
+better health management.\\
 The growing elderly population faces significant challenges in health management and
 safety. Many seniors struggle to monitor vital health parameters, leading to unnoticed
 risks. The complexity of medication regimens can result in missed doses, jeopardizing
