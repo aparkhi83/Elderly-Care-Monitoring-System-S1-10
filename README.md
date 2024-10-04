@@ -52,6 +52,13 @@ ing missed doses and promoting adherence to medication schedules.
 </details>
 
 <!-- Third Section -->
+## Box Diagram
+<details>
+  <summary>Detail</summary>
+
+> Update a neat logisim circuit diagram
+
+</details>
 
 ## Working
 
