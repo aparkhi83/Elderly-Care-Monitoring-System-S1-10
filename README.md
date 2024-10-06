@@ -56,7 +56,7 @@ ing missed doses and promoting adherence to medication schedules.
 <details>
   <summary>Detail</summary>
 
-> Update a neat logisim circuit diagram
+> ![Block Diagram](Snapshots/Block_Diagram.jpeg)
 
 </details>
 
