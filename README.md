@@ -52,7 +52,7 @@ ing missed doses and promoting adherence to medication schedules.
 </details>
 
 <!-- Third Section -->
-## Box Diagram
+## Functional Box Diagram
 <details>
   <summary>Detail</summary>
 
