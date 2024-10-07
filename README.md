@@ -90,3 +90,12 @@ ing missed doses and promoting adherence to medication schedules.
 > Neatly update the Verilog code in code style only.
 
 </details>
+
+## References
+
+<details>
+  <summary>Detail</summary>
+
+> http://www.csroc.org.tw/journal/JOC24-2/JOC24-2-1.pdf<br>
+https://www.safewise.com/what-is-fall-detection/<br>
+https://blogs.worldbank.org/en/health/health-systems-must-address-unique-needs-aging-populations<br>
