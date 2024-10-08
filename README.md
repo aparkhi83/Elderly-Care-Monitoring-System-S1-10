@@ -56,7 +56,7 @@ ing missed doses and promoting adherence to medication schedules.
 <details>
   <summary>Detail</summary>
 
-> ![Block Diagram](Snapshots/Block2.png)
+> ![Block Diagram](Snapshots/Block2png.png)
 
 </details>
 
