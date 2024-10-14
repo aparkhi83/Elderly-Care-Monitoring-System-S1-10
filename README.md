@@ -76,7 +76,11 @@ ing missed doses and promoting adherence to medication schedules.
 <details>
   <summary>Detail</summary>
 
-> Update a neat logisim circuit diagram
+> ![Main Circuit](Snapshots/main.png)
+> ![BPM monitor](Snapshots/bpm.png)
+> ![Temperature monitor](Snapshots/temperature.png)
+> ![Fall Detection System](Snapshots/fall.png)
+> ![Medicine Reminder](Snapshots/medicine.png)
 
 </details>
 
