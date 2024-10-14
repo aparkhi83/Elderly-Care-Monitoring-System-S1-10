@@ -77,10 +77,11 @@ ing missed doses and promoting adherence to medication schedules.
   <summary>Detail</summary>
 
 > ![Main Circuit](Snapshots/main.png)
-> ![BPM monitor](Snapshots/bpm.png)
-> ![Temperature monitor](Snapshots/temperature.png)
-> ![Fall Detection System](Snapshots/fall.png)
-> ![Medicine Reminder](Snapshots/medicine.png)
+> ![BPM monitor](Snapshots/bpm1.png)
+> ![Temperature monitor](Snapshots/temp1.png)
+> ![Fall Detection System](Snapshots/fall1.png)
+> ![Medicine Reminder](Snapshots/medicine1.png)
+> ![Control System](Snapshots/control1.png)
 
 </details>
 
