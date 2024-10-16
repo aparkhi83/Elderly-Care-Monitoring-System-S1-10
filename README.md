@@ -107,9 +107,10 @@ This is the main circuit diagram of our Elderly Care Monitoring System, which co
   Fall Detection System<br>
   Medicine Reminder<br>
   Control System<br>
-> ![Main Circuit](Snapshots/main.png)<br> <br>
+  
+>  ![Main Circuit](Snapshots/main.png) <br> <br>
   BPM Monitor takes pulses of the patient and returns whether it is abnormal or normal.
-> ![BPM monitor](Snapshots/bpm1.png)<br> <br>
+> ![BPM monitor](Snapshots/bpm1.png) <br> <br>
   Temperature Monitor takes temperature of the patient and returns  whether it is abnormal or normal.
 > ![Temperature monitor](Snapshots/temp1.png)<br> <br>
   Fall detection system detects a fall, which passes through a debouncing system and starts a recovery timer which sends an alert after 30 seconds if it is not reset.
