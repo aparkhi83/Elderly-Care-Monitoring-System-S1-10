@@ -52,11 +52,11 @@ ing missed doses and promoting adherence to medication schedules.
 </details>
 
 <!-- Third Section -->
-## Functional Box Diagram
+## Block Diagram
 <details>
   <summary>Detail</summary>
 
-> ![Block Diagram](Snapshots/Block2png.png)
+> ![Block Diagram](Snapshots/block2.png)
 
 </details>
 
@@ -66,6 +66,8 @@ ing missed doses and promoting adherence to medication schedules.
   <summary>Detail</summary>
 
 > The Elderly Monitoring System is designed to assist in the continuous health and safety monitoring of elderly individuals. It integrates multiple modules, each serving a specific function to enhance the well-being and daily life of the user. The system consists of the following core components: <br>
+
+> ![Block Diagram](Snapshots/Block2png.png) <br>
 
  Control System: It is used to identify what module we are interested in looking at a particular instance between BPM monitoring and Temperature monitoring. It is made using a simple finite state machine, which contains three states: BPM monitoring, Temperature monitoring and Idle State which is accomplished using D flip flops.<br>
 
