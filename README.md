@@ -101,12 +101,22 @@ This intricate system includes a debouncing system which ensures that no noisy s
 
 <details>
   <summary>Detail</summary>
-
+This is the main circuit diagram of our Elderly Care Monitoring System, which contains the following modules:
+  BPM Monitor<br>
+  Temperature Monitor<br>
+  Fall Detection System<br>
+  Medicine Reminder<br>
+  Control System<br>
 > ![Main Circuit](Snapshots/main.png)<br> <br>
+  BPM Monitor takes pulses of the patient and returns whether it is abnormal or normal.
 > ![BPM monitor](Snapshots/bpm1.png)<br> <br>
+  Temperature Monitor takes temperature of the patient and returns  whether it is abnormal or normal.
 > ![Temperature monitor](Snapshots/temp1.png)<br> <br>
+  Fall detection system detects a fall, which passes through a debouncing system and starts a recovery timer which sends an alert after 30 seconds if it is not reset.
 > ![Fall Detection System](Snapshots/fall1.png)<br> <br>
+  Medicine Reminder helps the patient to avoid missing any doses of their prescribed medication, thus taking care of their health.
 > ![Medicine Reminder](Snapshots/medicine1.png)<br> <br>
+  COntrol System helps to decide which state are we currently on.
 > ![Control System](Snapshots/control1.png)<br> <br>
 
 </details>
