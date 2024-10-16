@@ -1,175 +1,199 @@
 `timescale 1ns / 1ps
 
-module S1_T10_tb;
+module TB_Combined;
 
-    // Common signals
+    // Shared clock and reset signals
     reg clk;
-    reg reset;
+    reg global_reset;
 
-    // Fall Detection signals
-    reg fall_detector;
-    wire fall_state;
+    // Instantiate all modules and their signals
 
-    // BPM Monitor signals
-    reg mono_pulse;
-    wire [4:0] bpm;
+    // BPM Monitor Testbench signals
+    reg [7:0] pulse_count;  // Input pulse count
+    wire [7:0] bpm;
     wire bpm_state;
 
-    // Temperature Monitor signals
+    // Fall Detection Testbench signals
+    reg fall_sensor;
+    reg patient_reset;
+    wire alarm;
+    real fall_start_time;
+    real fall_duration;
+
+    // Medicine Reminder Testbench signals
+    wire medicine_reminder;
+
+    // Temperature Monitor Testbench signals
     reg [7:0] temperature;
     wire temp_high;
     wire temp_state;
-
-    // Medicine Reminder signals
-    wire medicine_reminder;
+    wire temp_low;
 
     // Instantiate all modules
-    Fall_Detection fall_detection_inst (
+    BPM_Monitor bpm_monitor_uut (
         .clk(clk),
-        .reset(reset),
-        .fall_detector(fall_detector),
-        .fall_state(fall_state)
-    );
-
-    BPM_Monitor bpm_monitor_inst (
-        .clk(clk),
-        .reset(reset),
-        .mono_pulse(mono_pulse),
+        .reset(global_reset),
+        .pulse_count(pulse_count),
         .bpm(bpm),
         .bpm_state(bpm_state)
     );
 
-    Temperature_Monitor temp_monitor_inst (
-        .temperature(temperature),
-        .temp_high(temp_high),
-        .temp_state(temp_state)
+    fall_detection_system fall_detection_uut (
+        .clk(clk),
+        .reset(global_reset),
+        .fall_sensor(fall_sensor),
+        .patient_reset(patient_reset),
+        .alarm(alarm)
     );
 
-    Medicine_Reminder medicine_reminder_inst (
+    Medicine_Reminder medicine_reminder_uut (
         .clk(clk),
-        .reset(reset),
+        .reset(global_reset),
         .medicine_reminder(medicine_reminder)
     );
 
-    // Clock generation
+    Temperature_Monitor temperature_monitor_uut (
+        .temperature(temperature),
+        .temp_high(temp_high),
+        .temp_state(temp_state),
+        .temp_low(temp_low)
+    );
+
+    // Common clock generation for all modules (1 MHz clock => 1 μs period)
     initial begin
         clk = 0;
-        forever #5 clk = ~clk;
+        forever #500 clk = ~clk;  // Toggle every 500 ns for 1 MHz clock
     end
 
-    // Test procedure
-    initial begin
-        // Initialize
-        reset = 1;
-        fall_detector = 0;
-        mono_pulse = 0;
-        temperature = 8'd98;
-        #100 reset = 0;
+    // Medicine Reminder Test Task
+    task test_medicine_reminder;
+        integer cycle_count;
+        begin
+            $display("\nMedicine Reminder Test Cases");
+            $display("+-------+-------------------+-----------------+");
+            $display("| Cycle | Time              | Medicine Reminder |");
+            $display("+-------+-------------------+-----------------+");
 
-        // Run tests for each module
-        test_fall_detection();
-        test_bpm_monitor();
-        test_temperature_monitor();
-        test_medicine_reminder();
+            for (cycle_count = 0; cycle_count <= 2100; cycle_count = cycle_count + 1) begin
+                @(posedge clk);  // Synchronize with positive clock edge
+                #1;  // Small delay to allow for signal propagation
+                $display("| %5d | %10d ns | %17b |", cycle_count, $time, medicine_reminder);
+            end
 
-        $finish;
-    end
+            $display("+-------+-------------------+-----------------+");
+        end
+    endtask
 
-    // Fall Detection test task
+    // Fall Detection Test Task
     task test_fall_detection;
-        integer i;
-        reg [31:0] fall_duration;
         begin
             $display("\nFall Detection Test Cases");
-            $display("+-------+----------------+--------------+");
-            $display("| Case  | Fall Duration  | Fall State   |");
-            $display("+-------+----------------+--------------+");
+            $display("+-----------------+-----------------+");
+            $display("| Time            | Fall Sensor     |");
+            $display("+-----------------+-----------------+-");
 
-            for (i = 1; i <= 30; i = i + 1) begin
-                fall_duration = $urandom_range(5, 50);
-                
-                fall_detector = 1;
-                #(fall_duration);
-                fall_detector = 0;
-                #10;
+            // Initialize Inputs
+            fall_sensor = 0;
+            patient_reset = 0;
 
-                $display("| %3d   | %14d | %12b |", i, fall_duration, fall_state);
-            end
+            // Test Case 1: No fall
+            #1000000;  // Wait 1 second
+            $display("| %0.2f seconds   | %b               |  ", 1.0,  fall_sensor);
 
-            $display("+-------+----------------+--------------+");
+            // Test Case 2: Fall detected, but patient resets before alarm
+            fall_sensor = 1; // Simulate fall detection
+            #10000;  // Wait for fall to be detected
+            #5000000;  // Wait 5 seconds for the alarm to trigger
+
+            // Check states
+            $display("| %0.2f seconds   | %b               |  ", 6.0,  fall_sensor);
+            patient_reset = 0; // Reset the patient
+            #1000;
+            patient_reset = 1; // Release the reset
+            #1000; 
+            fall_sensor = 1; // End the fall condition
+            $display("| %0.2f seconds   | %b               |  ", 15.0,  fall_sensor);
+
+            // Test Case 3: Fall detected, alarm triggered
+            fall_sensor = 1; // Simulate fall detection
+            #10000;  // Wait for fall to be detected
+            #31000000;  // Wait 31 seconds for the alarm to trigger
+
+            // Final check after the fall
+            $display("| %0.2f seconds   | %b               |  ", 31.0,  fall_sensor);
+            $display("+-----------------+-----------------+");
         end
     endtask
 
-    // BPM Monitor test task
+    // BPM Monitor Test Task
     task test_bpm_monitor;
-        integer i, j;
-        reg [31:0] num_pulses;
+        integer i;
         begin
             $display("\nBPM Monitor Test Cases");
-            $display("+-------+--------------+--------+-----------+");
-            $display("| Case  | Pulse Count  | BPM    | BPM State |");
-            $display("+-------+--------------+--------+-----------+");
+            $display("+-------+--------+----------+");
+            $display("| Pulse   | BPM    | State    |");
+            $display("+-------+--------+----------+");
 
+            // Loop over 35 test cases
             for (i = 1; i <= 35; i = i + 1) begin
-                num_pulses = $urandom_range(5, 60);
+                pulse_count = $urandom_range(5, 25);  // Random number of pulses between 5 and 25
                 
-                for (j = 0; j < num_pulses; j = j + 1) begin
-                    mono_pulse = 1;
-                    #10;
-                    mono_pulse = 0;
-                    #10;
-                end
-                
-                #100; // Wait for BPM calculation
+                // Reset the system at the start of each test case
+                global_reset = 1;
+                #1000 global_reset = 0;  // Wait for reset to clear
 
-                $display("| %3d   | %12d | %6d | %9b |", i, num_pulses, bpm, bpm_state);
+                // Wait for clock cycles to propagate
+                #1000;  // Wait for a clock cycle to process the pulse_count
+
+                // Display the test results
+                $display("| %6d | %6d | %8b |", pulse_count, bpm, bpm_state);
             end
 
-            $display("+-------+--------------+--------+-----------+");
+            $display("+-------+--------+----------+");
         end
     endtask
 
-    // Temperature Monitor test task
+    // Temperature Monitor Test Task
     task test_temperature_monitor;
         integer i;
         reg [7:0] temp_value;
         begin
             $display("\nTemperature Monitor Test Cases");
-            $display("+-------+-------------+-----------+------------+");
-            $display("| Case  | Temperature | Temp High | Temp State |");
-            $display("+-------+-------------+-----------+------------+");
+            $display("+-------+-------------+----------+");
+            $display("| Temp  | Temp State  | Time     |");
+            $display("+-------+-------------+----------+");
 
-            for (i = 1; i <= 40; i = i + 1) begin
-                temp_value = $urandom_range(85, 110);
+            for (i = 1; i <= 20; i = i + 1) begin
+                temp_value = $urandom_range(95, 102);  // Adjusted range for more realistic temperatures
                 temperature = temp_value;
-                #10;
+                #1000;
 
-                $display("| %3d   | %11d | %9b | %10b |", i, temp_value, temp_high, temp_state);
+                // Display the test results
+                $display("| %5d | %10b  | %10d |", temp_value,  temp_high,  $time);
             end
 
-            $display("+-------+-------------+-----------+------------+");
+            $display("+-------+-------------+----------+");
         end
     endtask
 
-    // Medicine Reminder test task
-    task test_medicine_reminder;
-        integer i;
-        reg [31:0] wait_time;
-        begin
-            $display("\nMedicine Reminder Test Cases");
-            $display("+-------+------------+-------------------+");
-            $display("| Case  | Wait Time  | Medicine Reminder |");
-            $display("+-------+------------+-------------------+");
+    // Test sequence
+    initial begin
+        // Initialize signals
+        global_reset = 1;
+        pulse_count = 0;
+        temperature = 0;
 
-            for (i = 1; i <= 25; i = i + 1) begin
-                wait_time = $urandom_range(500, 700);
-                #(wait_time);
+        // De-assert reset after a short delay
+        #1000 global_reset = 0;
 
-                $display("| %3d   | %10d | %17b |", i, wait_time, medicine_reminder);
-            end
+        // Run all tests sequentially
+        test_medicine_reminder();
+        test_fall_detection();
+        test_bpm_monitor();
+        test_temperature_monitor();
 
-            $display("+-------+------------+-------------------+");
-        end
-    endtask
+        // End simulation
+        $finish;
+    end
 
 endmodule
