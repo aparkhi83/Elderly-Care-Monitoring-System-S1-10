@@ -179,4 +179,36 @@ module Health_Monitoring_System;
         d_ff reminder_ff(reminder_active, clk, reset, medicine_reminder);
     endmodule
 
+    module Control_System(
+        input clk,
+        input reset,
+        input temp,
+        input bpm,
+        input idle,
+        output temp_out,
+        output bpm_out,
+        output idle_out
+    );
+
+    wire dff1_out, dff2_out;
+    wire not1_out, not2_out;
+    wire and1_out, and2_out, and3_out;
+
+    d_ff dff1 (.d(bpm), .clk(clk), .reset(reset), .q(dff1_out));
+    d_ff dff2 (.d(temp), .clk(clk), .reset(reset), .q(dff2_out));
+
+    not (not1_out, bpm);
+    not (not2_out, temp);
+
+    and (and1_out, temp, not1_out);
+    and (and2_out, idle, and1_out);
+    and (and3_out, and2_out, not2_out);
+
+    assign temp_out = and1_out;
+    assign bpm_out = and2_out;
+    assign idle_out = and3_out;
+
+endmodule
+
+
 endmodule
