@@ -88,18 +88,16 @@ module Health_Monitoring_System;
         output wire temp_state,
         output wire temp_low
     );
-        wire lt_90, lt_97, gt_100;
+        wire lt_97, gt_100;
         
-        and(lt_90, ~temperature[7], ~temperature[6], ~temperature[5], ~temperature[4], 
-                   temperature[3], ~temperature[2], temperature[1], ~temperature[0]);
         and(lt_97, ~temperature[7], ~temperature[6], ~temperature[5], ~temperature[4], 
                    temperature[3], temperature[2], ~temperature[1], temperature[0]);
         and(gt_100, ~temperature[7], ~temperature[6], ~temperature[5], temperature[4], 
                     ~temperature[3], temperature[2], temperature[1], temperature[0]);
 
-        or(temp_high, lt_97, gt_100);
-        buf(temp_state, gt_100);
-        buf(temp_low, lt_90);
+        or(temp_state, lt_97, gt_100);
+        buf(temp_high , gt_100);
+        buf(temp_low, lt_97);
     endmodule
 
     module fall_detection_system(
@@ -109,7 +107,7 @@ module Health_Monitoring_System;
         input wire patient_reset,
         output wire alarm
     );
-        parameter STABLE_TIME = 5;
+        parameter STABLE_TIME = 1;
         parameter RECOVERY_TIME = 30;
         parameter CLOCKS_PER_SECOND = 1000000;
 
