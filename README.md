@@ -130,9 +130,10 @@ This is the main circuit diagram of our Elderly Care Monitoring System, which co
 
 <details>
   <summary>Detail</summary>
-  
-[Verilog File](Verilog/S1-T10.v)
-[Testbench File](Verilog/S1-T10_tb.v)
+
+[Verilog File(Gate Level)](Verilog/S1-T10-Structural.v)<br>
+[Verilog File (Data Flow Level)](Verilog/S1-T10.v)<br>
+[Testbench File](Verilog/S1-T10_tb.v)<br>
 > ![](Snapshots/bpm3.png)<br> <br>
 > ![](Snapshots/temp3.png)<br> <br>
 > ![](Snapshots/fall3.png)<br> <br>
