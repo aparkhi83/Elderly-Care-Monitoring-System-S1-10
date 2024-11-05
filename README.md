@@ -141,6 +141,15 @@ This is the main circuit diagram of our Elderly Care Monitoring System, which co
 
 </details>
 
+## Hardware Implementation
+
+<details>
+  <summary>Detail</summary>
+
+  In the hardware implementation of our fall detection feature, we had to scale down the circuit to be able to execute it on a small scale in which instead letting the recovery timer go on for 30 seconds, we had to convert it to a 4 second timer. Otherwise, it performs the same function of warning if the patient falls.<br>
+  > ![](Snapshots/fall1.png)<br> <br>
+</details>
+
 ## References
 
 <details>
