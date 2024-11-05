@@ -148,7 +148,7 @@ This is the main circuit diagram of our Elderly Care Monitoring System, which co
 
   In the hardware implementation of our fall detection feature, we had to scale down the circuit to be able to execute it on a small scale in which instead letting the recovery timer go on for 30 seconds, we had to convert it to a 4 second timer. Otherwise, it performs the same function of warning if the patient falls, that is if the patient presses the reset button before 4 seconds, he/she is deemed to be in perfect state and has not fallen. If he/she fails to do so, the alarm goes off, thus ensuring timely medical intervention for the patient. <br>
   > ![](Snapshots/fall1.png)<br> <br>
-In the hardware implementation of our BPM monitor, we had to scale down the circuit to reduce the time for which we measure the actual heartbeat of the patient from 30 seconds to 8 seconds for easier implementation. So in reference to actual data corresponding to senior citizens, we calculated that the normal beats number in 8 seconds should be between 8 and 13, and any other beats number which doesn't fall into this criterion will be deemed as an abnormal heartbeat.
+In the hardware implementation of our BPM monitor, we had to scale down the circuit to reduce the time for which we measure the actual heartbeat of the patient from 30 seconds to 8 seconds for easier implementation. So in reference to actual data corresponding to senior citizens, we calculated that the normal beats number in 8 seconds should be between 8 and 13, and any other beats number which doesn't fall into this criterion will be deemed as an abnormal heartbeat. <br>
   > ![](Snapshots/bpmfinal.png)<br> <br>
 </details>
 
